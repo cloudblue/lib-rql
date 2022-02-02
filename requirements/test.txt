@@ -1,0 +1,15 @@
+coverage==6.0.2
+flake8==3.9.2
+pytest==6.2.5
+pytest-cov==3.0.0
+pytest-mock==3.6.1
+pytest-deadfixtures==2.2.1
+pytest-randomly==3.10.1
+flake8-bugbear==21.9.2
+flake8-broken-line==0.3.0
+flake8-commas==2.0.0
+flake8-comprehensions==3.7.0
+flake8-debugger==4.0.0
+flake8-eradicate==1.1.0
+flake8-import-order==0.18.1
+flake8-string-format==0.3.0
