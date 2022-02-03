@@ -1,10 +1,10 @@
 Python RQL
 ==========
-![pyversions](https://img.shields.io/pypi/pyversions/lib-rql.svg)
+[![pyversions](https://img.shields.io/pypi/pyversions/lib-rql.svg)](https://pypi.org/project/lib-rql/)
 [![PyPi Status](https://img.shields.io/pypi/v/lib-rql.svg)](https://pypi.org/project/lib-rql/)
-[![codecov](https://codecov.io/gh/cloudblue/lib-rql/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudblue/lib-rql)
-[![PyPI status](https://img.shields.io/pypi/status/lib-rql.svg)](https://pypi.python.org/pypi/lib-rql/)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lib-rql&metric=alert_status)](https://sonarcloud.io/dashboard?id=lib-rql)
+[![PyPI status](https://img.shields.io/pypi/status/lib-rql.svg)](https://pypi.org/project/lib-rql/)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lib-rql&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=lib-rql)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=lib-rql&metric=coverage)](https://sonarcloud.io/summary/new_code?id=lib-rql)
 
 RQL
 ---
