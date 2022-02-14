@@ -3,7 +3,6 @@
 #
 
 from cachetools import LFUCache
-
 from lark import Lark
 from lark.exceptions import LarkError
 

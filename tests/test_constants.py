@@ -1,10 +1,9 @@
 #
 #  Copyright © 2022 Ingram Micro Inc. All rights reserved.
 #
+import pytest
 
 from py_rql.constants import FilterLookups
-
-import pytest
 
 
 @pytest.mark.parametrize('func', ('numeric', 'string', 'boolean'))

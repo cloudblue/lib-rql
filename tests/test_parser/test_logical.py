@@ -4,13 +4,11 @@
 
 from functools import partial
 
+import pytest
 from lark.exceptions import LarkError
 
 from py_rql.constants import ComparisonOperators, LogicalOperators
 from py_rql.parser import RQLParser
-
-import pytest
-
 from tests.test_parser.utils import LogicalTransformer
 
 

@@ -1,0 +1,82 @@
+[tool.poetry]
+name = "lib-rql"
+version = "25.0.0"
+description = "Python RQL Filtering"
+authors = ["CloudBlue LLC"]
+license = "Apache-2.0"
+packages = [
+    { include = "py_rql" }
+]
+readme = "./README.md"
+homepage = "https://connect.cloudblue.com/community/api/rql/"
+repository = "https://github.com/cloudblue/lib-rql"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: Unix",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Text Processing :: Filters"
+]
+keywords = [
+    "rql",
+    "filter",
+]
+
+
+[tool.poetry.dependencies]
+python = "^3.6"
+lark-parser = "0.11.0"
+cachetools = ">=4.2.4"
+python-dateutil = ">=2.8.2"
+
+[tool.poetry.dev-dependencies]
+ipython = ">=7.10.0"
+pytest = "^6.1.2"
+pytest-cov = "^2.10.1"
+pytest-mock = "^3.3.1"
+coverage = {extras = ["toml"], version = "^5.3"}
+flake8 = "~3.8"
+flake8-bugbear = "~20"
+flake8-cognitive-complexity = "^0.1"
+flake8-commas = "~2.0"
+flake8-future-import = "~0.4"
+flake8-import-order = "~0.18"
+flake8-broken-line = "~0.3"
+Sphinx = "^4.4.0"
+sphinx-rtd-theme = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+log_cli = true
+addopts = "--show-capture=no --junitxml=tests/reports/out.xml --cov=py_rql --cov-report xml:tests/reports/coverage.xml  --cov-report html:tests/reports/cov_html"
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+omit = [
+    "*/migrations/*",
+    "*/config/*",
+    "*/settings/*",
+    "*/manage.py",
+    "*/wsgi.py",
+    "*/urls.py"
+]
+
+exclude_lines = [
+    "pragma: no cover",
+    "def __str__",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]

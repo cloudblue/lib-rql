@@ -1,14 +1,11 @@
 #
 #  Copyright © 2022 Ingram Micro Inc. All rights reserved.
 #
-
+import pytest
 from lark.exceptions import LarkError
 
 from py_rql.constants import RQL_ORDERING_OPERATOR
 from py_rql.parser import RQLParser
-
-import pytest
-
 from tests.test_parser.constants import FAIL_PROPS, OK_PROPS
 from tests.test_parser.utils import OrderingTransformer
 
