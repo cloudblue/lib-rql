@@ -1,4 +1,4 @@
-name: Deploy Python-RQL library
+name: Publish Python-RQL library
 
 on:
   push:
@@ -21,36 +21,29 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        pip install -r requirements/dev.txt
-        pip install -r requirements/test.txt
-        pip install twine
+        python -m pip install --upgrade pip
+        pip install poetry
+        poetry install
     - name: Linting
       run: |
-        flake8
+        poetry run flake8
     - name: Testing
       run: |
-        python setup.py test
-    - name: Fix coverage report for Sonar
-      run: |
-        sed -i 's/\/home\/runner\/work\/lib-rql\/lib-rql\//\/github\/workspace\//g' ./tests/reports/coverage.xml
-    - name: SonarCloud
-      uses: SonarSource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    - name: Wait sonar to process report
-      uses: jakejarvis/wait-action@master
+        poetry run pytest
+    - name: Extract tag name
+      uses: actions/github-script@v3
+      id: tag
       with:
-        time: '15s'
-    - name: SonarQube Quality Gate check
-      uses: sonarsource/sonarqube-quality-gate-action@master
-      timeout-minutes: 5
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    - name: Publish to PyPI
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        result-encoding: string
+        script: |
+          return context.payload.ref.replace(/refs\/tags\//, '')
+    - name: Build and publish
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
-        python setup.py sdist bdist_wheel
-        twine upload dist/*
+        poetry version ${{ steps.tag.outputs.result }}
+        poetry build
+        poetry publish -u $TWINE_USERNAME -p $TWINE_PASSWORD
+

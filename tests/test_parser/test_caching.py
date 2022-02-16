@@ -1,11 +1,10 @@
 #
 #  Copyright © 2022 Ingram Micro Inc. All rights reserved.
 #
+import pytest
 
 from py_rql.exceptions import RQLFilterParsingError
 from py_rql.parser import RQLParser
-
-import pytest
 
 
 def test_cache():
