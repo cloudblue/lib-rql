@@ -40,8 +40,8 @@ or_op: _or
     | _L_BRACE _or _R_BRACE
 
 _or: _OR _logical_exp
-    | _L_BRACE term "|" term _R_BRACE
-    | _L_BRACE term ";" term _R_BRACE
+    | _L_BRACE term ("|" term)+ _R_BRACE
+    | _L_BRACE term (";" term)+ _R_BRACE
 
 _logical_exp: _L_BRACE expr_term (_COMMA expr_term)+ _R_BRACE
 
