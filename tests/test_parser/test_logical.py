@@ -52,8 +52,22 @@ def test_and_ok(operator, expression):
 
 
 @pytest.mark.parametrize('operator', ['|', ';'])
+def test_or_ok_3(operator):
+    query = '({logical})'.format(logical=operator.join(['a=b'] * 3))
+    result = logical_transform(query)
+
+    assert result == {
+        LogicalOperators.get_grammar_key(LogicalOperators.OR): [
+            (ComparisonOperators.EQ, 'a', 'b'),
+            (ComparisonOperators.EQ, 'a', 'b'),
+            (ComparisonOperators.EQ, 'a', 'b'),
+        ],
+    }
+
+
+@pytest.mark.parametrize('operator', ['|', ';'])
 @pytest.mark.parametrize('expression', ok_expressions)
-def test_or_ok(operator, expression):
+def test_or_ok_2(operator, expression):
     base_result = base_or_logical_transform(LogicalOperators.OR, expression)
     check_expression(LogicalOperators.OR, expression, base_result)
 
