@@ -14,8 +14,7 @@ from py_rql.operators import get_operator_func_by_operator
 
 
 class BaseRQLTransformer(Transformer):
-    @classmethod
-    def _extract_comparison(cls, args):
+    def _extract_comparison(self, args):
         if len(args) == 2:
             # Notation: id=1  # noqa: E800
             operation = ComparisonOperators.EQ
@@ -24,20 +23,19 @@ class BaseRQLTransformer(Transformer):
 
         elif args[0].data == 'comp_term':
             # Notation: eq(id,1)  # noqa: E800
-            operation = cls._get_value(args[0])
+            operation = self._get_value(args[0])
             prop_index = 1
             value_index = 2
 
         else:
             # Notation: id=eq=1
-            operation = cls._get_value(args[1])
+            operation = self._get_value(args[1])
             prop_index = 0
             value_index = 2
 
-        return cls._get_value(args[prop_index]), operation, cls._get_value(args[value_index])
+        return self._get_value(args[prop_index]), operation, self._get_value(args[value_index])
 
-    @staticmethod
-    def _get_value(obj):
+    def _get_value(self, obj):
         while isinstance(obj, Tree):
             obj = obj.children[0]
 
