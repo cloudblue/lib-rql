@@ -102,9 +102,14 @@ def test_logical_fail(query):
         logical_transform(query)
 
 
-def test_logical_nesting():
-    q = '((p1=v1|p1=ge=v2)&(p3=le=v4,gt(p5,v6));ne(p7,p8))'
-    result = logical_transform(q)
+@pytest.mark.parametrize('query', [
+    '((p1=v1|p1=ge=v2)&(p3=le=v4,gt(p5,v6));ne(p7,p8))',
+    '(or(p1=v1,p1=ge=v2)&(p3=le=v4,gt(p5,v6));ne(p7,p8))',
+    '(or(p1=v1,p1=ge=v2)&and(p3=le=v4,gt(p5,v6));ne(p7,p8))',
+    'or(and((p1=v1|p1=ge=v2),(p3=le=v4,gt(p5,v6))),ne(p7,p8))',
+])
+def test_logical_nesting_or(query):
+    result = logical_transform(query)
 
     and_grammar_key = LogicalOperators.get_grammar_key(LogicalOperators.AND)
     or_grammar_key = LogicalOperators.get_grammar_key(LogicalOperators.OR)
@@ -123,6 +128,42 @@ def test_logical_nesting():
                 ],
             }],
         }, (ComparisonOperators.NE, 'p7', 'p8')],
+    }
+
+
+@pytest.mark.parametrize('query', [
+    '((p1=v1,or(p2=v2,p3=v3),and(p4=v4,p5=v5)))',
+    '(p1=v1,or(p2=v2,p3=v3),and(p4=v4,p5=v5))',
+    'and(p1=v1,or(p2=v2,p3=v3),and(p4=v4,p5=v5))',
+    'p1=v1&(p2=v2|p3=v3)&(p4=v4,p5=v5)',
+    'p1=v1,(p2=v2|p3=v3),(p4=v4,p5=v5)',
+])
+def test_logical_nesting_and(query):
+    result = logical_transform(query)
+
+    and_grammar_key = LogicalOperators.get_grammar_key(LogicalOperators.AND)
+    or_grammar_key = LogicalOperators.get_grammar_key(LogicalOperators.OR)
+
+    assert result == {
+        and_grammar_key: [
+            ('eq', 'p1', 'v1'),
+            {
+                and_grammar_key: [
+                    {
+                        or_grammar_key: [
+                            ('eq', 'p2', 'v2'),
+                            ('eq', 'p3', 'v3'),
+                        ],
+                    },
+                    {
+                        and_grammar_key: [
+                            ('eq', 'p4', 'v4'),
+                            ('eq', 'p5', 'v5'),
+                        ],
+                    },
+                ],
+            },
+        ],
     }
 
 
