@@ -32,9 +32,9 @@ logical: and_op
 and_op: _and 
     | _L_BRACE _and _R_BRACE
 
-_and: _AND _logical_exp
-    | term "&" term
-    | term _COMMA term
+_and: _AND? _logical_exp
+    | term ("&" term)+
+    | term (_COMMA term)+
 
 or_op: _or
     | _L_BRACE _or _R_BRACE
@@ -43,7 +43,7 @@ _or: _OR _logical_exp
     | _L_BRACE term ("|" term)+ _R_BRACE
     | _L_BRACE term (";" term)+ _R_BRACE
 
-_logical_exp: _L_BRACE expr_term (_COMMA expr_term)+ _R_BRACE
+_logical_exp: _L_BRACE term (_COMMA term)+ _R_BRACE
 
 not_op: _NOT _L_BRACE expr_term _R_BRACE
 
