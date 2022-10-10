@@ -135,7 +135,6 @@ def test_logical_nesting_or(query):
     '((p1=v1,or(p2=v2,p3=v3),and(p4=v4,p5=v5)))',
     '(p1=v1,or(p2=v2,p3=v3),and(p4=v4,p5=v5))',
     'and(p1=v1,or(p2=v2,p3=v3),and(p4=v4,p5=v5))',
-    'p1=v1&(p2=v2|p3=v3)&(p4=v4,p5=v5)',
     'p1=v1,(p2=v2|p3=v3),(p4=v4,p5=v5)',
 ])
 def test_logical_nesting_and(query):
@@ -148,19 +147,15 @@ def test_logical_nesting_and(query):
         and_grammar_key: [
             ('eq', 'p1', 'v1'),
             {
+                or_grammar_key: [
+                    ('eq', 'p2', 'v2'),
+                    ('eq', 'p3', 'v3'),
+                ],
+            },
+            {
                 and_grammar_key: [
-                    {
-                        or_grammar_key: [
-                            ('eq', 'p2', 'v2'),
-                            ('eq', 'p3', 'v3'),
-                        ],
-                    },
-                    {
-                        and_grammar_key: [
-                            ('eq', 'p4', 'v4'),
-                            ('eq', 'p5', 'v5'),
-                        ],
-                    },
+                    ('eq', 'p4', 'v4'),
+                    ('eq', 'p5', 'v5'),
                 ],
             },
         ],
@@ -173,23 +168,26 @@ def test_and_chain():
     and_grammar_key = LogicalOperators.get_grammar_key(LogicalOperators.AND)
     assert result == {
         and_grammar_key: [
-            (ComparisonOperators.NE, 'p1', 'v1'),
             {
                 and_grammar_key: [
+                    (ComparisonOperators.NE, 'p1', 'v1'),
                     (ComparisonOperators.GE, 'p2', 'and'),
-                    (ComparisonOperators.EQ, 'or', 'v3'),
                 ],
             },
+            (ComparisonOperators.EQ, 'or', 'v3'),
         ],
     }
+    assert result == logical_transform('((ne(p1,v1)&p2=ge=and),or=v3)')
 
-    assert result == logical_transform('(ne(p1,v1)&(p2=ge=and,or=v3))')
 
-
-def test_or_chain():
-    q = '(ne(p1,v1)|(p2=ge=and;or=v3))'
+@pytest.mark.parametrize('query', (
+    '(ne(p1,v1)|(p2=ge=and;or=v3)|p4=v4)',
+    'or(ne(p1,v1),(ge(p2,and);or=v3),p4=v4)',
+))
+def test_or_chain(query):
     or_grammar_key = LogicalOperators.get_grammar_key(LogicalOperators.OR)
-    assert logical_transform(q) == {
+    result = logical_transform(query)
+    assert result == {
         or_grammar_key: [
             (ComparisonOperators.NE, 'p1', 'v1'),
             {
@@ -198,5 +196,6 @@ def test_or_chain():
                     (ComparisonOperators.EQ, 'or', 'v3'),
                 ],
             },
+            (ComparisonOperators.EQ, 'p4', 'v4'),
         ],
     }
