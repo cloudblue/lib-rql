@@ -12,7 +12,10 @@ Notes:
 """
 
 RQL_GRAMMAR = r"""
-start: term?
+start: _top_term?
+    
+_top_term: term
+    | term_and_comma
 
 term: expr_term
     | logical
@@ -34,7 +37,6 @@ and_op: _and
 
 _and: _AND? _logical_exp
     | term ("&" term)+
-    | term (_COMMA term)+
 
 or_op: _or
     | _L_BRACE _or _R_BRACE
@@ -46,6 +48,11 @@ _or: _OR _logical_exp
 _logical_exp: _L_BRACE term (_COMMA term)+ _R_BRACE
 
 not_op: _NOT _L_BRACE expr_term _R_BRACE
+
+// Separated rule for the "and" expression in comma style on the top level to avoid ambiguous parsing
+term_and_comma: logical_and_comma -> term
+logical_and_comma: and_op_comma -> logical
+and_op_comma: term (_COMMA term)+ -> and_op
 
 comp: comp_term _L_BRACE prop _COMMA val _R_BRACE
     | prop _EQUALITY comp_term _EQUALITY val
