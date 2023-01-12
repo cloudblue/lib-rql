@@ -15,11 +15,11 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "Operating System :: Unix",
-    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Topic :: Text Processing :: Filters"
 ]
 keywords = [
@@ -29,35 +29,35 @@ keywords = [
 
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = ">=3.7,<4"
 lark-parser = "0.11.0"
 cachetools = ">=4.2.4"
 python-dateutil = ">=2.8.2"
+flake8-isort = "^6.0.0"
 
 [tool.poetry.dev-dependencies]
 ipython = ">=7.10.0"
-pytest = "^6.1.2"
+pytest = ">=6.1.2,<8"
 pytest-cov = "^2.10.1"
 pytest-mock = "^3.3.1"
-coverage = {extras = ["toml"], version = "^5.3"}
-flake8 = "~3.8"
-flake8-bugbear = "~20"
+coverage = {extras = ["toml"], version = "^5.3,<7"}
+flake8 = ">=3.8,<6"
+flake8-bugbear = ">=20,<23"
 flake8-cognitive-complexity = "^0.1"
-flake8-commas = "~2.0"
+flake8-commas = "~2.1"
 flake8-future-import = "~0.4"
-flake8-import-order = "~0.18"
-flake8-broken-line = "~0.3"
-Sphinx = "^4.4.0"
+flake8-broken-line = ">=0.3,<0.7"
+flake8-pyproject = "^1.2.2"
+Sphinx = "^4.3.0"
 sphinx-rtd-theme = "^1.0.0"
-
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
-testpaths = "tests"
-log_cli = true
+testpaths = ["tests"]
+log_cli = false
 addopts = "--show-capture=no --junitxml=tests/reports/out.xml --cov=py_rql --cov-report xml:tests/reports/coverage.xml  --cov-report html:tests/reports/cov_html"
 
 [tool.coverage.run]
@@ -80,3 +80,22 @@ exclude_lines = [
     "raise NotImplementedError",
     "if __name__ == .__main__.:",
 ]
+
+[tool.flake8]
+exclude = [".idea", ".git", "venv*/", ".eggs/", "*.egg-info"]
+max-line-length = 100
+show-source = true
+max-cognitive-complexity = 15
+ignore = ["FI1", "W503", "W605", "B008"]
+
+[tool.isort]
+src_paths = "*"
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+group_by_package = true
+multi_line_output = 3
+force_grid_wrap = 4
+combine_as_imports = true
+use_parentheses = true
+include_trailing_comma = true
+line_length = 100
+lines_after_imports = 2

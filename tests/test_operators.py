@@ -1,12 +1,14 @@
 #
-#  Copyright © 2022 Ingram Micro Inc. All rights reserved.
+#  Copyright © 2023 Ingram Micro Inc. All rights reserved.
 #
 import pytest
 
 from py_rql import operators
 from py_rql.constants import (
-    ComparisonOperators, ListOperators,
-    LogicalOperators, SearchOperators,
+    ComparisonOperators,
+    ListOperators,
+    LogicalOperators,
+    SearchOperators,
 )
 
 

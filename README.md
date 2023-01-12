@@ -123,12 +123,12 @@ print(results)
 ## Development
 
 
-1. Python 3.6+
+1. Python 3.7+
 0. Install dependencies `pip install poetry && poetry install`
 
 ## Testing
 
-1. Python 3.6+
+1. Python 3.7+
 0. Install dependencies `pip install poetry && poetry install`
 
 Check code style: `poetry run flake8`

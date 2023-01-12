@@ -1,7 +1,14 @@
 #
-#  Copyright © 2022 Ingram Micro Inc. All rights reserved.
+#  Copyright © 2023 Ingram Micro Inc. All rights reserved.
 #
-from operator import eq, ge, gt, le, lt, ne  # noqa: F401
+from operator import (  # noqa: F401
+    eq,
+    ge,
+    gt,
+    le,
+    lt,
+    ne,
+)
 
 from py_rql.constants import (
     ComparisonOperators,

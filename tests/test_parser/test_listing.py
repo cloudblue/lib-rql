@@ -1,12 +1,17 @@
 #
-#  Copyright © 2022 Ingram Micro Inc. All rights reserved.
+#  Copyright © 2023 Ingram Micro Inc. All rights reserved.
 #
 import pytest
 from lark.exceptions import LarkError
 
 from py_rql.constants import ListOperators
 from py_rql.parser import RQLParser
-from tests.test_parser.constants import FAIL_PROPS, LIST_FAIL_VALUES, OK_PROPS, OK_VALUES
+from tests.test_parser.constants import (
+    FAIL_PROPS,
+    LIST_FAIL_VALUES,
+    OK_PROPS,
+    OK_VALUES,
+)
 from tests.test_parser.utils import ListTransformer
 
 

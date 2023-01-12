@@ -1,10 +1,15 @@
 #
-#  Copyright © 2022 Ingram Micro Inc. All rights reserved.
+#  Copyright © 2023 Ingram Micro Inc. All rights reserved.
 #
 import pytest
 
 from py_rql.cast import get_default_cast_func_for_type
-from py_rql.constants import FilterTypes, ListOperators, RQL_EMPTY, RQL_NULL
+from py_rql.constants import (
+    RQL_EMPTY,
+    RQL_NULL,
+    FilterTypes,
+    ListOperators,
+)
 from py_rql.helpers import apply_operator
 from py_rql.operators import get_operator_func_by_operator
 

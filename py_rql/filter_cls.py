@@ -1,11 +1,11 @@
 #
-#  Copyright © 2022 Ingram Micro Inc. All rights reserved.
+#  Copyright © 2023 Ingram Micro Inc. All rights reserved.
 #
 from cachetools import LFUCache
 
 from py_rql import parse
 from py_rql.cast import get_default_cast_func_for_type
-from py_rql.constants import FilterLookups, FilterTypes, RESERVED_FILTER_NAMES
+from py_rql.constants import RESERVED_FILTER_NAMES, FilterLookups, FilterTypes
 from py_rql.exceptions import RQLFilterLookupError
 from py_rql.transformer import RQLToFunctionTransformer
 
