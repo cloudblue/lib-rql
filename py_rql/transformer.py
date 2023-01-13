@@ -1,14 +1,11 @@
 #
-#  Copyright © 2022 Ingram Micro Inc. All rights reserved.
+#  Copyright © 2023 Ingram Micro Inc. All rights reserved.
 #
 import functools
 
 from lark import Transformer, Tree
 
-from py_rql.constants import (
-    ComparisonOperators,
-    RQL_PLUS,
-)
+from py_rql.constants import RQL_PLUS, ComparisonOperators
 from py_rql.helpers import apply_logical_operator, apply_operator
 from py_rql.operators import get_operator_func_by_operator
 

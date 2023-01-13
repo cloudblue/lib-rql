@@ -1,11 +1,13 @@
 #
-#  Copyright © 2022 Ingram Micro Inc. All rights reserved.
+#  Copyright © 2023 Ingram Micro Inc. All rights reserved.
 #
 import pytest
 
 from py_rql.exceptions import (
-    RQLFilterError, RQLFilterLookupError,
-    RQLFilterParsingError, RQLFilterValueError,
+    RQLFilterError,
+    RQLFilterLookupError,
+    RQLFilterParsingError,
+    RQLFilterValueError,
 )
 
 

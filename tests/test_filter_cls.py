@@ -1,9 +1,9 @@
 #
-#  Copyright © 2022 Ingram Micro Inc. All rights reserved.
+#  Copyright © 2023 Ingram Micro Inc. All rights reserved.
 #
 import pytest
 
-from py_rql.constants import FilterLookups, FilterTypes, RESERVED_FILTER_NAMES
+from py_rql.constants import RESERVED_FILTER_NAMES, FilterLookups, FilterTypes
 from py_rql.exceptions import RQLFilterLookupError
 from py_rql.filter_cls import FilterClass
 

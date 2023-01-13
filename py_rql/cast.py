@@ -1,11 +1,16 @@
 #
-#  Copyright © 2022 Ingram Micro Inc. All rights reserved.
+#  Copyright © 2023 Ingram Micro Inc. All rights reserved.
 #
 from decimal import Decimal
 
 from dateutil.parser import isoparse
 
-from py_rql.constants import FilterTypes, RQL_EMPTY, RQL_FALSE, RQL_NULL
+from py_rql.constants import (
+    RQL_EMPTY,
+    RQL_FALSE,
+    RQL_NULL,
+    FilterTypes,
+)
 
 
 def cast_string(val):

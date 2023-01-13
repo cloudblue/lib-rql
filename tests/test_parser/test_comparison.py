@@ -1,5 +1,5 @@
 #
-#  Copyright © 2022 Ingram Micro Inc. All rights reserved.
+#  Copyright © 2023 Ingram Micro Inc. All rights reserved.
 #
 
 from functools import partial
@@ -9,7 +9,12 @@ from lark.exceptions import LarkError
 
 from py_rql.constants import ComparisonOperators as CompOp
 from py_rql.parser import RQLParser
-from tests.test_parser.constants import FAIL_PROPS, FAIL_VALUES, OK_PROPS, OK_VALUES
+from tests.test_parser.constants import (
+    FAIL_PROPS,
+    FAIL_VALUES,
+    OK_PROPS,
+    OK_VALUES,
+)
 from tests.test_parser.utils import ComparisonTransformer
 
 
