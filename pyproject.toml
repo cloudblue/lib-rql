@@ -33,23 +33,29 @@ python = ">=3.7,<4"
 lark-parser = "0.11.0"
 cachetools = ">=4.2.4"
 python-dateutil = ">=2.8.2"
-flake8-isort = "^6.0.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.test.dependencies]
 ipython = ">=7.10.0"
 pytest = ">=6.1.2,<8"
-pytest-cov = "^2.10.1"
+pytest-cov = ">=2.10.1,<5"
 pytest-mock = "^3.3.1"
-coverage = {extras = ["toml"], version = "^5.3,<7"}
+coverage = {extras = ["toml"], version = ">=5.3,<7"}
 flake8 = ">=3.8,<6"
 flake8-bugbear = ">=20,<23"
 flake8-cognitive-complexity = "^0.1"
 flake8-commas = "~2.1"
 flake8-future-import = "~0.4"
+flake8-isort = "^5.0"
 flake8-broken-line = ">=0.3,<0.7"
-flake8-pyproject = "^1.2.2"
-Sphinx = "^4.3.0"
-sphinx-rtd-theme = "^1.0.0"
+isort = "^5.10"
+importlib-metadata = "<5"
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = ">=1.4"
+mkdocs-material = ">=9"
+mkautodoc = "^0.2.0"
+mkdocs-glightbox = "^0.3.1"
+mkdocs-macros-plugin = "^0.7.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -80,13 +86,6 @@ exclude_lines = [
     "raise NotImplementedError",
     "if __name__ == .__main__.:",
 ]
-
-[tool.flake8]
-exclude = [".idea", ".git", "venv*/", ".eggs/", "*.egg-info"]
-max-line-length = 100
-show-source = true
-max-cognitive-complexity = 15
-ignore = ["FI1", "W503", "W605", "B008"]
 
 [tool.isort]
 src_paths = "*"
