@@ -6,6 +6,11 @@ edit_uri: ""
 copyright: Copyright &copy; 2023 Ingram Micro. All Rights Reserved.
 extra:
   generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/cloudblue
+    - icon: material/home
+      link: https://connect.cloudblue.com/community/
 extra_css:
   - css/custom.css
 theme:
@@ -25,7 +30,7 @@ theme:
         icon: "material/lightbulb-outline"
         name: "Switch to light mode"
 markdown_extensions:
-  - mkautodoc
+  - admonition
   - pymdownx.highlight
   - pymdownx.superfences
   - pymdownx.tabbed:
@@ -40,6 +45,20 @@ plugins:
   - glightbox
   - search:
       lang: en
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          options:
+            show_root_heading: true
+            show_signature_annotations: true
+            merge_init_into_class: true
+            show_source: false
+  - autorefs
+watch:
+  - docs
+  - py_rql
 nav:
   - Home: index.md
   - Guide: guide.md
+  - API Reference: reference.md
