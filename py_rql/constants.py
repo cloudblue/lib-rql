@@ -62,14 +62,15 @@ class FilterLookups:
     """`Case-insensitive like` operator"""
 
     @classmethod
-    def numeric(cls, with_null=True):
+    def numeric(cls, with_null: bool = True) -> set:
         """
         Returns the default lookups for numeric fields.
 
-        :param with_null: if true, includes the `null` lookup, defaults to True
-        :type with_null: bool, optional
-        :return: a set with the default lookups.
-        :rtype: set
+        Args:
+            with_null (bool): if true, includes the `null` lookup, defaults to True.
+
+        Returns:
+            (set): a set with the default lookups.
         """
         return cls._add_null(
             {cls.EQ, cls.NE, cls.GE, cls.GT, cls.LT, cls.LE, cls.IN, cls.OUT}, with_null,
@@ -80,10 +81,11 @@ class FilterLookups:
         """
         Returns the default lookups for string fields.
 
-        :param with_null: if true, includes the `null` lookup, defaults to True
-        :type with_null: bool, optional
-        :return: a set with the default lookups.
-        :rtype: set
+        Args:
+            with_null (bool): if true, includes the `null` lookup, defaults to True.
+
+        Returns:
+            (set): a set with the default lookups.
         """
         return cls._add_null({cls.EQ, cls.NE, cls.IN, cls.OUT, cls.LIKE, cls.I_LIKE}, with_null)
 
@@ -92,10 +94,11 @@ class FilterLookups:
         """
         Returns the default lookups for boolean fields.
 
-        :param with_null: if true, includes the `null` lookup, defaults to True
-        :type with_null: bool, optional
-        :return: a set with the default lookups.
-        :rtype: set
+         Args:
+            with_null (bool): if true, includes the `null` lookup, defaults to True.
+
+        Returns:
+            (set): a set with the default lookups.
         """
         return cls._add_null({cls.EQ, cls.NE}, with_null)
 
