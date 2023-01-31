@@ -54,6 +54,10 @@ def ilike(a, b):
     return like(a.lower(), b.lower())
 
 
+def range_op(a, b):
+    return a >= b[0] and a <= b[1]
+
+
 def get_operator_func_by_operator(op):
     mapping = {
         ComparisonOperators.EQ: eq,
@@ -64,6 +68,7 @@ def get_operator_func_by_operator(op):
         ComparisonOperators.LT: lt,
         ListOperators.IN: in_op,
         ListOperators.OUT: out_op,
+        ListOperators.RANGE: range_op,
         f'{LogicalOperators.AND}_op': and_op,
         f'{LogicalOperators.OR}_op': or_op,
         f'{LogicalOperators.NOT}_op': not_op,
