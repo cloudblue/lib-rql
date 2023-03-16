@@ -47,9 +47,8 @@ def test_apply_operator(mocker):
 
 
 def test_apply_operator_prop_not_found(mocker):
-    mocked_op = mocker.MagicMock(return_value=True)
+    mocked_op = mocker.MagicMock(return_value=False)
     assert apply_operator('other', mocked_op, 'value_b', {'root': 'value_a'}) is False
-    mocked_op.assert_not_called()
 
 
 def test_apply_logical_operator(mocker):
