@@ -15,7 +15,7 @@ def apply_operator(prop, operator, value, obj):
     try:
         prop_value = extract_value(obj, prop)
     except KeyError:
-        return False
+        prop_value = None
     result = operator(prop_value, value)
     return result
 
