@@ -15,7 +15,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "Operating System :: Unix",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -29,7 +28,7 @@ keywords = [
 
 
 [tool.poetry.dependencies]
-python = ">=3.7,<4"
+python = ">=3.8,<4"
 lark-parser = "0.11.0"
 cachetools = ">=4.2.4"
 python-dateutil = ">=2.8.2"
@@ -45,8 +44,9 @@ flake8-bugbear = ">=20,<23"
 flake8-cognitive-complexity = "^0.1"
 flake8-commas = "~2.1"
 flake8-future-import = "~0.4"
-flake8-isort = "^5.0"
+flake8-isort = "^6.0"
 flake8-broken-line = ">=0.3,<0.7"
+flake8-pyproject = "^1.2.3"
 isort = "^5.10"
 importlib-metadata = "<5"
 
@@ -99,3 +99,22 @@ use_parentheses = true
 include_trailing_comma = true
 line_length = 100
 lines_after_imports = 2
+
+[tool.flake8]
+exclude = [
+    ".idea",
+    ".vscode",
+    ".git",
+    "pg_data",
+    "venv",
+    "*.eggs",
+    "*.egg",
+    "tests/fixtures",
+    "setup.py",
+    "resources",
+    "docs/*",
+]
+show-source = true
+max-line-length = 100
+max-cognitive-complexity = 20
+ignore = ["FI1", "I100", "W503", "W605", "B008"]
