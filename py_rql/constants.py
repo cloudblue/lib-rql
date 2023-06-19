@@ -61,6 +61,9 @@ class FilterLookups:
     I_LIKE = 'ilike'
     """`Case-insensitive like` operator"""
 
+    RANGE = 'range'
+    """`range` operator"""
+
     @classmethod
     def numeric(cls, with_null: bool = True) -> set:
         """
@@ -73,7 +76,7 @@ class FilterLookups:
             (set): a set with the default lookups.
         """
         return cls._add_null(
-            {cls.EQ, cls.NE, cls.GE, cls.GT, cls.LT, cls.LE, cls.IN, cls.OUT}, with_null,
+            {cls.EQ, cls.NE, cls.GE, cls.GT, cls.LT, cls.LE, cls.IN, cls.OUT, cls.RANGE}, with_null,
         )
 
     @classmethod
@@ -122,6 +125,7 @@ class ComparisonOperators:
 class ListOperators:
     IN = 'in'
     OUT = 'out'
+    RANGE = 'range'
 
 
 class LogicalOperators:

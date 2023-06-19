@@ -26,6 +26,7 @@ expr_term: comp
     | searching
     | ordering
     | select
+    | range
     | _L_BRACE expr_term _R_BRACE
     
 logical: and_op
@@ -65,6 +66,8 @@ ordering: ordering_term _signed_props
 select: select_term _signed_props
 _signed_props: _L_BRACE _R_BRACE
     | _L_BRACE sign_prop (_COMMA sign_prop)* _R_BRACE
+
+range: range_term _L_BRACE prop _COMMA val _COMMA val _R_BRACE
     
 val: prop
     | tuple
@@ -89,6 +92,7 @@ tuple: _TUPLE _L_BRACE (comp|searching) (_COMMA (comp|searching))* _R_BRACE
 !search_term: "like" | "ilike"
 !ordering_term: "ordering"
 !select_term: "select"
+!range_term: "range"
 
     
 PROP: /[a-zA-Z]/ /[\w\-\.]/*

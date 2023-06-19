@@ -91,6 +91,10 @@ class RQLToFunctionTransformer(BaseRQLTransformer):
         operation, prop, val = tuple(self._get_value(args[index]) for index in range(3))
         return self._get_func_for_lookup(prop, operation, val)
 
+    def range(self, args):
+        operation, prop, *val = tuple(self._get_value(args[index]) for index in range(4))
+        return self._get_func_for_lookup(prop, operation, val)
+
     def _get_func_for_lookup(self, prop, operation, val):
         self.filter_cls.validate_lookup(prop, operation)
 
