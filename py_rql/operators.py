@@ -55,7 +55,7 @@ def ilike(a, b):
 
 
 def range_op(a, b):
-    return a >= b[0] and a <= b[1]
+    return b[0] <= a <= b[1]
 
 
 def get_operator_func_by_operator(op):
