@@ -199,3 +199,48 @@ def test_or_chain(query):
             (ComparisonOperators.EQ, 'p4', 'v4'),
         ],
     }
+
+
+def test_logical_tuple_and_not():
+    result = logical_transform('(not(id=fg))')
+
+    not_grammar_key = LogicalOperators.get_grammar_key(LogicalOperators.NOT)
+
+    assert result == {
+        not_grammar_key: [(ComparisonOperators.EQ, 'id', 'fg')],
+    }
+
+
+def test_logical_tuple_and_not_w_and_nesting():
+    result = logical_transform('((not(eq(id,fg)))&(not(ge(external_id,fg))))')
+
+    and_grammar_key = LogicalOperators.get_grammar_key(LogicalOperators.AND)
+    not_grammar_key = LogicalOperators.get_grammar_key(LogicalOperators.NOT)
+
+    assert result == {
+        and_grammar_key: [
+            {not_grammar_key: [(ComparisonOperators.EQ, 'id', 'fg')]},
+            {not_grammar_key: [(ComparisonOperators.GE, 'external_id', 'fg')]},
+        ],
+    }
+
+
+def test_logical_tuple_nesting_ands_and_ors():
+    result = logical_transform(
+        '((((eq(id,*baba*))&(eq(external_id,*baba*))))|(((eq(id,*dziad*)))))',
+    )
+
+    and_grammar_key = LogicalOperators.get_grammar_key(LogicalOperators.AND)
+    or_grammar_key = LogicalOperators.get_grammar_key(LogicalOperators.OR)
+
+    assert result == {
+        or_grammar_key: [
+            {
+                and_grammar_key: [
+                    (ComparisonOperators.EQ, 'id', '*baba*'),
+                    (ComparisonOperators.EQ, 'external_id', '*baba*'),
+                ],
+            },
+            (ComparisonOperators.EQ, 'id', '*dziad*'),
+        ],
+    }

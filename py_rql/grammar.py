@@ -13,26 +13,28 @@ Notes:
 
 RQL_GRAMMAR = r"""
 start: _top_term?
-    
+
 _top_term: term
     | term_and_comma
 
 term: expr_term
     | logical
     | tuple
-    
+    | _L_BRACE logical _R_BRACE
+    | _L_BRACE tuple _R_BRACE
+
 expr_term: comp
     | listing
     | searching
     | ordering
     | select
     | _L_BRACE expr_term _R_BRACE
-    
+
 logical: and_op
     | or_op
     | not_op
-    
-and_op: _and 
+
+and_op: _and
     | _L_BRACE _and _R_BRACE
 
 _and: _AND? _logical_exp
@@ -57,7 +59,7 @@ and_op_comma: term (_COMMA term)+ -> and_op
 comp: comp_term _L_BRACE prop _COMMA val _R_BRACE
     | prop _EQUALITY comp_term _EQUALITY val
     | prop _EQUALITY val
-    
+
 listing: list_term _L_BRACE prop _COMMA _L_BRACE val (_COMMA val)* _R_BRACE _R_BRACE
 searching: search_term _L_BRACE prop _COMMA val _R_BRACE
 
@@ -65,7 +67,7 @@ ordering: ordering_term _signed_props
 select: select_term _signed_props
 _signed_props: _L_BRACE _R_BRACE
     | _L_BRACE sign_prop (_COMMA sign_prop)* _R_BRACE
-    
+
 val: prop
     | tuple
     | QUOTED_VAL
@@ -78,11 +80,11 @@ prop: comp_term
     | ordering_term
     | select_term
     | PROP
-    
+
 tuple: _TUPLE _L_BRACE (comp|searching) (_COMMA (comp|searching))* _R_BRACE
 
 !sign_prop: ["+"|"-"] prop
-    
+
 !comp_term: "eq" | "ne" | "gt" | "ge" | "lt" | "le"
 !logical_term: _AND | _OR | _NOT
 !list_term: "in" | "out"
@@ -90,7 +92,7 @@ tuple: _TUPLE _L_BRACE (comp|searching) (_COMMA (comp|searching))* _R_BRACE
 !ordering_term: "ordering"
 !select_term: "select"
 
-    
+
 PROP: /[a-zA-Z]/ /[\w\-\.]/*
 QUOTED_VAL: /"[^"]*"/
     | /'[^']*'/
