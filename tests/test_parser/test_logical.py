@@ -201,8 +201,18 @@ def test_or_chain(query):
     }
 
 
-def test_logical_tuple_and_not():
-    result = logical_transform('(not(id=fg))')
+@pytest.mark.parametrize(
+    'query',
+    (
+        '(not(id=fg))',
+        '((not(id=fg)))',
+        'not(eq(id,fg))',
+        '((((not(id=fg)))))',
+        'not((eq(id,fg)))',
+    ),
+)
+def test_logical_tuple_and_not(query):
+    result = logical_transform(query)
 
     not_grammar_key = LogicalOperators.get_grammar_key(LogicalOperators.NOT)
 
@@ -244,3 +254,12 @@ def test_logical_tuple_nesting_ands_and_ors():
             (ComparisonOperators.EQ, 'id', '*dziad*'),
         ],
     }
+
+
+@pytest.mark.parametrize('query', ('((not(ilike(id,*8684*))))', ))
+def test_logical_tuple_not_and_ilike(query):
+    result = logical_transform(query)
+
+    not_grammar_key = LogicalOperators.get_grammar_key(LogicalOperators.NOT)
+
+    assert not_grammar_key in result

@@ -20,8 +20,7 @@ _top_term: term
 term: expr_term
     | logical
     | tuple
-    | _L_BRACE logical _R_BRACE
-    | _L_BRACE tuple _R_BRACE
+    | _L_BRACE term _R_BRACE
 
 expr_term: comp
     | listing
