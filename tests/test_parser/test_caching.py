@@ -22,3 +22,25 @@ def test_cache():
     assert cache.currsize == 2
     assert cache.get(hash('a=b')) == ast
     assert cache.get(hash('b=c&x=g'))
+
+
+def test_query_over_length_limit_is_not_cached():
+    cache = RQLParser._cache
+    cache.clear()
+
+    query = '&'.join(['a=b'] * 200)
+    assert len(query) > RQLParser.CACHE_MAX_QUERY_LENGTH
+
+    assert RQLParser.parse_query(query)
+    assert cache.currsize == 0
+
+
+def test_query_at_length_limit_is_cached():
+    cache = RQLParser._cache
+    cache.clear()
+
+    query = 'a=' + 'b' * (RQLParser.CACHE_MAX_QUERY_LENGTH - 2)
+    assert len(query) == RQLParser.CACHE_MAX_QUERY_LENGTH
+
+    assert RQLParser.parse_query(query)
+    assert cache.currsize == 1
