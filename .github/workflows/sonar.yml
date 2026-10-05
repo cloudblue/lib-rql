@@ -1,0 +1,54 @@
+name: Quality analysis
+
+on:
+  # Unlike build.yml, which checks a pull request whatever branch it targets, the
+  # analysis is deliberately master-only: SonarQube works out what is new code by
+  # comparing against the base branch, and master is the only branch it analyses, so a
+  # pull request stacked on another one has nothing to be compared against. The commits
+  # of a stack are analysed when it lands on master.
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  sonar:
+    name: SonarQube
+    runs-on: ubuntu-latest
+    # The analysis needs SONAR_TOKEN, which GitHub does not expose to pull
+    # requests opened from a fork. Those get analysed once they are merged.
+    if: github.event_name == 'push' || (github.actor != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository)
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v7
+        with:
+          # SonarQube needs the full history to attribute issues and to work
+          # out the new code period.
+          fetch-depth: 0
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: poetry
+      - name: Install dependencies
+        run: poetry install --no-interaction
+      # Only for the coverage report the scanner picks up, see
+      # sonar.python.coverage.reportPaths in sonar-project.properties. The
+      # supported version matrix is tested in build.yml.
+      - name: Testing
+        run: poetry run pytest
+      # The previous workflow rewrote the paths in coverage.xml to
+      # /github/workspace, which the scanner needed back when it ran inside a
+      # container. The scanner CLI now runs directly on the runner, so the
+      # paths coverage.py writes are already the right ones.
+      - name: SonarQube scan
+        uses: SonarSource/sonarqube-scan-action@v8
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: SonarQube quality gate check
+        uses: SonarSource/sonarqube-quality-gate-action@v1.2.1
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
