@@ -47,7 +47,7 @@ flake8-isort = "^6.0"
 flake8-broken-line = ">=0.3,<0.7"
 flake8-pyproject = "^1.2.3"
 isort = "^5.10"
-importlib-metadata = "<5"
+importlib-metadata = "<10"
 
 [tool.poetry.group.docs.dependencies]
 mkdocs = ">=1.4"
