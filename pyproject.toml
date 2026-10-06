@@ -53,7 +53,7 @@ importlib-metadata = "<5"
 mkdocs = ">=1.4"
 mkdocs-material = ">=9"
 mkdocs-glightbox = "^0.3.1"
-mkdocs-macros-plugin = "^0.7.0"
+mkdocs-macros-plugin = ">=0.7,<1.6"
 mkdocstrings = "^0.20.0"
 mkdocstrings-python = "^0.8.3"
 
