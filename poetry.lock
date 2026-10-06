@@ -629,17 +629,18 @@ i18n = ["Babel (>=2.7)"]
 
 [[package]]
 name = "lark-parser"
-version = "0.11.0"
+version = "0.12.0"
 description = "a modern parsing library"
 optional = false
 python-versions = "*"
 groups = ["main"]
 files = [
-    {file = "lark-parser-0.11.0.tar.gz", hash = "sha256:d047e680418221d21be587cd8f36843df97479a5623b74a7d811c1d832e04989"},
-    {file = "lark_parser-0.11.0-py2.py3-none-any.whl", hash = "sha256:1d710d4c4664b52579aae80324ff409dedc22b5c592684429f6bd11bfeb7fd49"},
+    {file = "lark-parser-0.12.0.tar.gz", hash = "sha256:15967db1f1214013dca65b1180745047b9be457d73da224fcda3d9dd4e96a138"},
+    {file = "lark_parser-0.12.0-py2.py3-none-any.whl", hash = "sha256:0eaf30cb5ba787fe404d73a7d6e61df97b21d5a63ac26c5008c78a494373c675"},
 ]
 
 [package.extras]
+atomic-cache = ["atomicwrites"]
 nearley = ["js2py"]
 regex = ["regex"]
 
@@ -1556,4 +1557,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<4"
-content-hash = "46e8de49e38bf5a733a896cbb9793ee5c980549118a00071b9b606119e0b4303"
+content-hash = "aae4f94e88055dc472488391a9f1b75c318a2cdb379df68461ed1e6701945688"
