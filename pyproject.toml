@@ -39,7 +39,7 @@ pytest-cov = ">=2.10.1,<5"
 pytest-mock = "^3.3.1"
 coverage = {extras = ["toml"], version = ">=5.3,<7"}
 flake8 = ">=3.8,<6"
-flake8-bugbear = ">=20,<23"
+flake8-bugbear = ">=20,<24"
 flake8-cognitive-complexity = "^0.1"
 flake8-commas = "~2.1"
 flake8-future-import = "~0.4"
