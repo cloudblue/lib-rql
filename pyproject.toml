@@ -34,28 +34,29 @@ python-dateutil = ">=2.8.2"
 
 [tool.poetry.group.test.dependencies]
 ipython = ">=7.10.0"
-pytest = ">=6.1.2,<8"
+pytest = ">=9.0.3"
 pytest-cov = ">=2.10.1,<5"
 pytest-mock = "^3.3.1"
 coverage = {extras = ["toml"], version = ">=5.3,<7"}
 flake8 = ">=3.8,<6"
-flake8-bugbear = ">=20,<23"
+flake8-bugbear = ">=20,<24"
 flake8-cognitive-complexity = "^0.1"
-flake8-commas = "~2.1"
+flake8-commas = ">=4.0"
 flake8-future-import = "~0.4"
-flake8-isort = "^6.0"
+flake8-isort = ">=6,<8"
 flake8-broken-line = ">=0.3,<0.7"
 flake8-pyproject = "^1.2.3"
 isort = "^5.10"
-importlib-metadata = "<5"
+importlib-metadata = "<10"
 
 [tool.poetry.group.docs.dependencies]
 mkdocs = ">=1.4"
 mkdocs-material = ">=9"
 mkdocs-glightbox = "^0.3.1"
-mkdocs-macros-plugin = "^0.7.0"
-mkdocstrings = "^0.20.0"
-mkdocstrings-python = "^0.8.3"
+mkdocs-macros-plugin = ">=1.0"
+mkdocstrings = ">=0.27"
+mkdocstrings-python = ">=1.11"
+pymdown-extensions = "<12.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
