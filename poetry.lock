@@ -390,18 +390,18 @@ setuptools = "*"
 
 [[package]]
 name = "flake8-commas"
-version = "2.1.0"
+version = "4.0.0"
 description = "Flake8 lint for trailing commas."
 optional = false
-python-versions = "*"
+python-versions = ">=3.8"
 groups = ["test"]
 files = [
-    {file = "flake8-commas-2.1.0.tar.gz", hash = "sha256:940441ab8ee544df564ae3b3f49f20462d75d5c7cac2463e0b27436e2050f263"},
-    {file = "flake8_commas-2.1.0-py2.py3-none-any.whl", hash = "sha256:ebb96c31e01d0ef1d0685a21f3f0e2f8153a0381430e748bf0bbbb5d5b453d54"},
+    {file = "flake8_commas-4.0.0-py3-none-any.whl", hash = "sha256:cad476d71ba72e8b941a8508d5b9ffb6b03e50f7102982474f085ad0d674b685"},
+    {file = "flake8_commas-4.0.0.tar.gz", hash = "sha256:a68834b42a9a31c94ca790efe557a932c0eae21a3479c6b9a23c4dc077e3ea96"},
 ]
 
 [package.dependencies]
-flake8 = ">=2"
+flake8 = ">=5"
 
 [[package]]
 name = "flake8-future-import"
@@ -1556,4 +1556,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<4"
-content-hash = "46e8de49e38bf5a733a896cbb9793ee5c980549118a00071b9b606119e0b4303"
+content-hash = "f8e32d2fe30c1b6e79d79d84675c440e24dfb306313761d8470d546cab8674f2"
